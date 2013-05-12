@@ -3,18 +3,21 @@ pat.js
 
 Patting on a layering system on top of any existing webpages.
 
-    // <script src="pat.js"></script>
+    // <script src="lib/pat.js"></script>
 
 	// initialised all relevant scritps for the layer
-    $().pat('init', {
+    $('body').pat('init', {
         'script': 'jquery.js',
         'css', 'uncommon.css'
         });
     
     // default background layer
-    $().pat('newlayer', {
-    	background-color: 'black',
-        opacity: 0.5
+    $('body').pat('newlayer', {
+      'id' : 'newlayer',
+      'css' : {
+          'background-color' : 'black',
+          opacity : 0.5
+      }
     });
     
     // all content is divided between:
@@ -23,12 +26,12 @@ Patting on a layering system on top of any existing webpages.
     //     'h2': 'right text (24px)',
     //     'h3' : ' bottom text (12px)'
     //   }
-    $().pat('overlay', $("#test"),
+    $('body').pat('highlight', $("#test"),
     	{ ... }
         )
         
     // for speciy iframe for the top menu
-    $().pat('menu', 'top', 
+    $('body').pat('menu', 'top', 
     	{ 
          iframe: 'http://....',
          height: 50px
