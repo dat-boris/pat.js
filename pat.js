@@ -97,7 +97,6 @@
                 // Ensure that we can deal with the layer, insert new item
                 $.each(['top', 'left', 'right', 'bottom'], function (i, pos) {
                     if (pos in patOptions) {
-                        debugger;
                         var content = patOptions[pos];
 
                         // fill in the template
@@ -127,13 +126,13 @@
                                  )+'px',
                             left: (offset.left + 
                                   (
-                                   pos == 'left' ? offset.width : 
-                                   pos == 'right' ? -$out.outerWidth() : 
+                                   pos == 'right' ? offset.width : 
+                                   pos == 'left' ? -$out.outerWidth() : 
                                    0
                                   )
                                  )+'px',
-                            width: offset.width,
-                            height: offset.height
+                            width: $out.outerWidth(),
+                            height: $out.outerHeight()
                         });
 
                         // register with the variable (e.g. pat.leftpanel)

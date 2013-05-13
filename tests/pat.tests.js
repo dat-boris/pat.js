@@ -47,8 +47,6 @@ describe("pat.js", function() {
                 'bottom' : { 'h2' : 'this is bottom layer' },
             });
 
-            debugger;
-
             expect($(".patjs.leftpanel").length).toEqual($toHighlight.length);
 
         });
