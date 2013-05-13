@@ -41,7 +41,14 @@
         return $("#"+patid);
     }
 
+    // passing back boolean cannot make it a jquery object
+    $.isPatted = function ($e) {
+        return ($e.data('pat.attachedPanel') ? true : false);
+    }
+    
     $.fn.pat = function(cmd, options){
+
+        var $self = $(this);
 
         if (this.length == 0) {
             throw "No elemented passed to pat.js - use $('body')";
@@ -49,14 +56,14 @@
 
         var patOptions = options;
 
-        return this.each(function(){
+        var ret = this.each(function(){
 
             if (console) {
                 console.log("[pat.js] checking out the cmd '"+cmd+"' patOpts "+JSON.stringify(patOptions))
             }
 
             if (cmd === 'init') {
-                $(this).data('pat.options', patOptions);
+                $self.data('pat.options', patOptions);
             } 
             else if (cmd === 'newlayer') {
                 var cssOption = $.extend({},
@@ -67,19 +74,21 @@
                 var $e = $("<div/>").css(cssOption);
 
                 if (patOptions.id) {
-                    $(this).data('pat.id', patOptions.id);
+                    $self.data('pat.id', patOptions.id);
                     $e.attr('id', patOptions.id);
                 }
 
                 $e.appendTo('body');
             }
+            else if (cmd == 'isHighlight') {
+            }
             else if (cmd === 'highlight') {
 
                 // Create window: split top layer into window pane
                 // TODO: iteration 1: just provide opposit color
-                var offset = $(this).offset();
-                offset.width = $(this).outerWidth();
-                offset.height = $(this).outerHeight();
+                var offset = $self.offset();
+                offset.width = $self.outerWidth();
+                offset.height = $self.outerHeight();
 
                 // setting up the highlight layer
                 var $topL = getParentLayer();
@@ -92,7 +101,7 @@
                             width: offset.width+'px'
                         });
 
-                $("<div/>").css(cssOption).appendTo($topL);
+                var $hl = $("<div/>").css(cssOption).appendTo($topL);
 
                 // Ensure that we can deal with the layer, insert new item
                 $.each(['top', 'left', 'right', 'bottom'], function (i, pos) {
@@ -136,7 +145,7 @@
                         });
 
                         // register with the variable (e.g. pat.leftpanel)
-                        $(this).data('pat.'+pos+'panel', $out);
+                        $self.data('pat.attachedPanel', [$hl, $out]);
                     }
                 });
             }
@@ -144,6 +153,14 @@
 
                 throw "Not implemented";
 
+            }
+            else if (cmd === 'noHighlight') {
+                var panels = $self.data('pat.attachedPanel');
+
+                $.each(panels, function (i, p) {
+                    p.remove();
+                });
+                $self.data('pat.attachedPanel', null);
             }
             else if (cmd === 'clear') {
                 var $l = getParentLayer();
@@ -153,6 +170,7 @@
                 throw "Unknown cmd parameter passed "+cmd;
             }
 
+            return ret;
         });
     };
 

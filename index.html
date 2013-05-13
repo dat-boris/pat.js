@@ -94,18 +94,22 @@
                       isLayered = true;
                   }
 
-                  var pos = $(this).data('pos');
-                  if (!pos) throw "No position specified!";
+                  if ($.isPatted($(this))) {
+                      $(this).pat('noHighlight');
+                  } else {
+                      var pos = $(this).data('pos');
+                      if (!pos) throw "No position specified!";
 
-                  var hlOpts = {};
-                  hlOpts[pos] = {
-                      'h1' : 'This is a fat title',
-                      'h2' : '+30%',
-                      'h3' : 'of the overall',
-                      'h4' : 'Explain some stuff'
-                  };
+                      var hlOpts = {};
+                      hlOpts[pos] = {
+                          'h1' : 'This is a fat title',
+                          'h2' : '+30%',
+                          'h3' : 'of the overall',
+                          'h4' : 'Explain some stuff'
+                      };
 
-                  $(this).pat('highlight', hlOpts );
+                      $(this).pat('highlight', hlOpts );
+                  }
               });
           });
       </script>
