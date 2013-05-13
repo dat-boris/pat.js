@@ -153,9 +153,36 @@
                 });
             }
             else if (cmd === 'menu') {
+                // setting up the highlight layer
+                var $topL = getParentLayer();
 
-                throw "Not implemented";
+                if (patOptions.pos !== 'top') {
+                    throw "Only top menu implemented now!";
+                }
 
+                var content = patOptions.content;
+
+                // fill in the template
+                var $out = $("<div/>");
+                // layout the class
+                $out.addClass('patjs').addClass(patOptions.pos+'menu');
+
+                // add the css
+                // content
+                $out.css(default_content_css).html(content);
+
+                // append to body - we dont want to opacity effect
+                $out.appendTo('body');
+
+                $out.css({
+                    top: '0px',
+                    left: '0px',
+                    width: '100%',
+                    height: patOptions.size
+                });
+
+                // register with the variable (e.g. pat.leftpanel)
+                $self.data('pat.attachedPanel', [$out]);
             }
             else if (cmd === 'noHighlight') {
                 var panels = $self.data('pat.attachedPanel');
@@ -167,6 +194,7 @@
             }
             else if (cmd === 'clear') {
                 var $l = getParentLayer();
+                $(".patjs").remove();
                 $l.remove();
             }
             else {

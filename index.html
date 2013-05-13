@@ -48,6 +48,13 @@
     <!-- $.pat with a pinch of salt -->
     <script src="pat.js" ></script>
 
+    <style>
+        /* give demo button a bit of space */
+        .demo-btn a {
+            margin : 5px;
+        }
+    </style>
+
   </head>
 
   <body>
@@ -62,7 +69,7 @@
 
           
           <h2>Demo</h2>
-          <div style="padding: 50px">
+          <div class="demo-btn">
               <div>
                   <a class="btn btn-primary" rel="pat" data-pos="top">Demo: top box</a>
                   <a class="btn btn-primary" rel="pat" data-pos="bottom">Demo: bottom box</a>
@@ -70,27 +77,42 @@
                   <a class="btn btn-primary" rel="pat" data-pos="right">Demo: right box</a>
               </div>
               <div>
-                  <a class="btn btn-primary" rel="pat-bar" data-pos="top" data-size="10%">Demo: top bar</a>
+                  <a class="btn btn-primary" rel="pat-bar" data-pos="top" data-size="150px">Demo: top bar</a>
+              </div>
+              <div>
+                  <a class="btn btn-primary" rel="pat-clear">Remove</a>
               </div>
           </div>
           <!-- a href="btn" rel="pat-menu" data-pos="top" data-height="20%">Demo: top graph box</a -->
 
           <h1> How to get started? </h1>
+
+          <p>Just include the tags on the page</p>
+
           <pre>
             &lt;script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" >&lt;/script>
             &lt;script src="pat.js" >&lt;/script>
+          </pre>
 
+          <p>And these example scripts to create layers</p>
+
+          <pre>
             &lt;script>
             $('body').pat('init', {});
+
+            // create one overlay
             $('body').pat('newlayer', {
               'id' : 'newlayer',
               'css' : {
                   ...
               }
             });
+
+            // highlight particular elements on page
             $('body').pat('highlight', $("#test"),
                 { ... }
                 )
+
             &lt;/script>
           </pre>
 
@@ -146,6 +168,8 @@
                   var pos = $(this).data('pos');
                   var size = $(this).data('size');
 
+                  if (!pos) throw "No position defined!";
+
                   if (!isLayered) {
                       $('body').pat('newlayer', {
                           'id' : 'newlayer'
@@ -158,10 +182,20 @@
                   } else {
                       // adding a bit of hi to the page
                       $(this).pat('menu', {
-                          'content': '<div id="chart"> <svg></svg> </div>' 
+                          'pos' : pos,
+                          'size' : size,
+                          'content': '<h2>Example chart</h2><div id="chart"> <svg></svg> </div>' 
                       });
                   }
               });
+
+              $('body').on('click', '[rel="pat-clear"]', function (e) {
+                  if (isLayered) {
+                      $('body').pat('clear');
+                      isLayered = false;
+                  }
+              });
+              
           });
       </script>
 
