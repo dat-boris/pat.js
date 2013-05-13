@@ -46,7 +46,15 @@
 
     // passing back boolean cannot make it a jquery object
     $.isPatted = function ($e) {
-        return ($e.data('pat.attachedPanel') ? true : false);
+        var $attached = $e.data('pat.attachedPanel');
+        if ($attached) {
+            // ensure that these are not orphaned from remove
+            $attached = $attached.filter(
+                   function (e) { return e.parent().length; }
+                   ).length;
+        }
+
+        return $attached ? true : false;
     }
     
     $.fn.pat = function(cmd, options){

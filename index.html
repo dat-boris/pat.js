@@ -3,7 +3,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Local mock test</title>
+    <title>pat.js</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="career@pathful.com">
@@ -87,33 +87,32 @@
 
           <h1> How to get started? </h1>
 
-          <p>Just include the tags on the page</p>
+          <p>Just include the tag on the page (require Jquery)</p>
 
           <pre>
-            &lt;script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" >&lt;/script>
-            &lt;script src="pat.js" >&lt;/script>
+    &lt;script src="pat.js" >&lt;/script>
           </pre>
 
           <p>And these example scripts to create layers</p>
 
           <pre>
-            &lt;script>
-            $('body').pat('init', {});
+    &lt;script>
+    $('body').pat('init', {});
 
-            // create one overlay
-            $('body').pat('newlayer', {
-              'id' : 'newlayer',
-              'css' : {
-                  ...
-              }
-            });
+    // create one overlay
+    $('body').pat('newlayer', {
+      'id' : 'newlayer',
+      'css' : {
+          ...
+      }
+    });
 
-            // highlight particular elements on page
-            $('body').pat('highlight', $("#test"),
-                { ... }
-                )
+    // highlight particular elements on page
+    $('body').pat('highlight', $("#test"),
+        { ... }
+        )
 
-            &lt;/script>
+    &lt;/script>
           </pre>
 
           <p>
