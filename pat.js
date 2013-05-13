@@ -26,7 +26,10 @@
         'position' : 'absolute',
         'background-color': 'white',
         //'opacity' : '0.4',
-        'z-index': 100000+1  // gruesome
+        'font-family':  'Courier, "Courier New", monospace',
+        'border' : '1px dashed black',
+        'z-index': 100000+1,  // gruesome
+        'pointer-events' : 'none'  // dont allow pointe events
     };
         
 
@@ -121,8 +124,8 @@
                             $('<'+tag+'/>').text(text).appendTo($out);
                         });
 
-                        // now, append so we get the height
-                        $out.appendTo($topL);
+                        // append to body - we dont want to opacity effect
+                        $out.appendTo('body');
 
                         // position
                         $out.css({
