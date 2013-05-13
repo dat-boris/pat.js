@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Local mock test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="career@pathful.com">
+
+    <link href="http://twitter.github.io/bootstrap/assets/css/bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+
+      @media (max-width: 980px) {
+        /* Enable use of floated navbar text */
+        .navbar-text.pull-right {
+          float: none;
+          padding-left: 5px;
+          padding-right: 5px;
+        }
+      }
+    </style>
+    <link href="http://twitter.github.io/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://twitter.github.io/bootstrap/assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://twitter.github.io/bootstrap/assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://twitter.github.io/bootstrap/assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://twitter.github.io/bootstrap/assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="http://twitter.github.io/bootstrap/assets/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="http://twitter.github.io/bootstrap/assets/ico/favicon.png">
+
+    <!-- $JQ -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+
+
+    <!-- $.pat with a pinch of salt -->
+    <script src="pat.js" ></script>
+
+  </head>
+
+  <body>
+   
+      <div class="container-fluud">
+          <h1>Pat.js on a layer</h1>
+
+          <p>
+          pat.js is a simple framework for injecting and highlight elements on a page.  
+          </p>
+
+          <div style="padding: 50px">
+              <a class="btn" rel="pat" data-pos="left">Demo: left box</a>
+              <a class="btn" rel="pat" data-pos="top">Demo: top box</a>
+              <a class="btn" rel="pat" data-pos="right">Demo: right box</a>
+              <a class="btn" rel="pat" data-pos="bottom">Demo: bottom box</a>
+          </div>
+          <!-- a href="btn" rel="pat-menu" data-pos="top" data-height="20%">Demo: top graph box</a -->
+
+          <h1> How to get started? </h1>
+          <a href="#">See README</a>
+          (or source)
+
+      </div>
+
+      <script>
+          $(function () {
+              var isLayered = false;
+
+              debugger;
+
+              // intialised
+              $('body').pat('init', {});
+
+              $('body').on('click', '[rel="pat"]', function (e) {
+                  var pos = $(this).data('pos');
+                  if (!pos) throw "No position specified!";
+
+                  var hlOpts = {};
+                  hlOpts[pos] = {
+                      'h1' : 'This is a fat title',
+                      'h2' : '+30%',
+                      'h3' : 'of the overall',
+                      'h4' : 'Explain some stuff'
+                  };
+
+                  $(this).pat('highlight', hlOpts );
+              });
+          });
+      </script>
+
+      <small>sponsored by weekend of beer from <a href="http://www.pathful.com">Pathful</a></small>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://twitter.github.io/bootstrap/assets/js/bootstrap-transition.js"></script>
+    <script src="http://twitter.github.io/bootstrap/assets/js/bootstrap-alert.js"></script>
+    <script src="http://twitter.github.io/bootstrap/assets/js/bootstrap-modal.js"></script>
+    <script src="http://twitter.github.io/bootstrap/assets/js/bootstrap-dropdown.js"></script>
+    <script src="http://twitter.github.io/bootstrap/assets/js/bootstrap-scrollspy.js"></script>
+    <script src="http://twitter.github.io/bootstrap/assets/js/bootstrap-tab.js"></script>
+    <script src="http://twitter.github.io/bootstrap/assets/js/bootstrap-tooltip.js"></script>
+    <script src="http://twitter.github.io/bootstrap/assets/js/bootstrap-button.js"></script>
+    <script src="http://twitter.github.io/bootstrap/assets/js/bootstrap-collapse.js"></script>
+    <script src="http://twitter.github.io/bootstrap/assets/js/bootstrap-carousel.js"></script>
+    <script src="http://twitter.github.io/bootstrap/assets/js/bootstrap-typeahead.js"></script>
+
+  </body>
+</html>
+
