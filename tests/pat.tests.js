@@ -35,11 +35,27 @@ describe("pat.js", function() {
           expect($("#newlayer").height()).toBeGreaterThan(MIN_SCREEN_HEIGHT);
 
         });
+        
+        it("should highlight with existing items", function () {
+
+            var $toHighlight = $('.nav-header');
+
+            $toHighlight.pat('highlight', {
+                'top' : { 'h1': 'Great heaader' },
+                'left' : {'h1' : '+10%'},
+                'right' : { 'h1' : 'compare to right border' },
+                'bottom' : { 'h2' : 'this is bottom layer' },
+            });
+
+            debugger;
+
+            expect($(".patjs.leftpanel").length).toEqual($toHighlight.length);
+
+        });
     });
 
     /*
        TODO
-    it("should highlight with existing items");
     it("should attach comment to existing items");
     it("should allow top bar to be shown");
     */

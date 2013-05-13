@@ -52,7 +52,7 @@
 
   <body>
    
-      <div class="container-fluud">
+      <div class="container">
           <h1>Pat.js on a layer</h1>
 
           <p>
@@ -71,18 +71,27 @@
           <a href="#">See README</a>
           (or source)
 
+          <div>
+              <small>weekend of time from <a href="http://www.pathful.com">Pathful</a>  and lookging for a front end <a href="https://angel.co/pathful/jobs">UI engineer</a></small>
+          </div>
       </div>
 
       <script>
           $(function () {
               var isLayered = false;
 
-              debugger;
-
               // intialised
               $('body').pat('init', {});
 
               $('body').on('click', '[rel="pat"]', function (e) {
+
+                  if (!isLayered) {
+                      $('body').pat('newlayer', {
+                          'id' : 'newlayer'
+                      });
+                      isLayered = true;
+                  }
+
                   var pos = $(this).data('pos');
                   if (!pos) throw "No position specified!";
 
@@ -99,7 +108,6 @@
           });
       </script>
 
-      <small>sponsored by weekend of beer from <a href="http://www.pathful.com">Pathful</a></small>
 
     <!-- Le javascript
     ================================================== -->
