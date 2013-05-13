@@ -203,6 +203,15 @@
               */
               function loadNVd3() {
 
+                  if (typeof(nv) === 'undefined' || typeof(d3) === 'undefined') {
+                      // nvd3 scripts might take time to load
+                      setTimeout(function () {
+                          loadNVd3();
+                      }, 500);
+
+                      return;
+                  }
+
                   nv.addGraph(function() { 
                       var chart = nv.models.lineChart();
 
