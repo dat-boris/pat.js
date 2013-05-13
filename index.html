@@ -77,7 +77,7 @@
                   <a class="btn btn-primary" rel="pat" data-pos="right">Demo: right box</a>
               </div>
               <div>
-                  <a class="btn btn-primary" rel="pat-bar" data-pos="top" data-size="150px">Demo: top bar</a>
+                  <a class="btn btn-primary" rel="pat-bar" data-pos="top" data-size="250px">Demo: top bar</a>
               </div>
               <div>
                   <a class="btn btn-primary" rel="pat-clear">Remove</a>
@@ -87,7 +87,7 @@
 
           <h1> How to get started? </h1>
 
-          <p>Just include the tag on the page (require Jquery)</p>
+          <p>Just include the tag on the page (require JQuery)</p>
 
           <pre>
     &lt;script src="pat.js" >&lt;/script>
@@ -129,9 +129,9 @@
               // intialised
               $('body').pat('init', {
                   script: [
+                  // load the nvd3 script as example
                     "http://nvd3.org/lib/d3.v2.js",
                     "http://nvd3.org/nv.d3.js",
-                    "http://data.ockamo.com/app/mocknvd.js"
                     ],
                   css: ["http://nvd3.org/src/nv.d3.css"]
               });
@@ -163,6 +163,7 @@
                   }
               });
 
+
               $('body').on('click', '[rel="pat-bar"]', function (e) {
                   var pos = $(this).data('pos');
                   var size = $(this).data('size');
@@ -185,6 +186,8 @@
                           'size' : size,
                           'content': '<h2>Example chart</h2><div id="chart"> <svg></svg> </div>' 
                       });
+
+                      loadNVd3();
                   }
               });
 
@@ -195,6 +198,66 @@
                   }
               });
               
+              /**
+              An example function to load NVd3
+              */
+              function loadNVd3() {
+
+                  nv.addGraph(function() { 
+                      var chart = nv.models.lineChart();
+
+                      chart.xAxis
+                      .axisLabel('Time (ms)')
+                      .tickFormat(function(d) { return d3.time.format('%b %d')(new Date(d)); });
+                      //.tickFormat(d3.format(',r'));
+
+                      chart.yAxis
+                      .axisLabel('Voltage (v)')
+                      .tickFormat(d3.format('.02f'));
+
+                      d3.select('#chart svg')
+                      .datum(sinAndCos())
+                      .transition().duration(500)
+                      .call(chart);
+
+                      nv.utils.windowResize(function() { d3.select('#chart svg').call(chart) });
+
+                      return chart;
+                  });
+
+
+
+
+
+                  /**************************************
+                  * Simple test data generator
+                  */
+
+
+                  function sinAndCos() {
+                      var sin = [],
+                      cos = [];
+
+                      for (var i = 1; i < 30; i++) {
+                          sin.push({x: new Date('2012-05-'+i), y: Math.sin(i/10)});
+                          cos.push({x: new Date('2012-05-'+i), y: .5 * Math.cos(i/10)});
+                      }
+
+                      return [
+                      {
+                          values: sin,
+                          key: 'Sine Wave',
+                          color: '#ff7f0e'
+                      },
+                      {
+                          values: cos,
+                          key: 'Cosine Wave',
+                          color: '#2ca02c'
+                      }
+                      ];
+                  }
+              }
+
           });
       </script>
 

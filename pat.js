@@ -56,6 +56,8 @@
 
         return $attached ? true : false;
     }
+
+    var LOAD_DELAY = 300;
     
     $.fn.pat = function(cmd, options){
 
@@ -75,6 +77,23 @@
 
             if (cmd === 'init') {
                 $self.data('pat.options', patOptions);
+                if (patOptions.script) {
+                    $.each(patOptions.script, function (i, e) {
+                        if ($("script[src='"+e+"']").length==0) {
+                            // we need to slightly delay each load
+                            setTimeout(function () {
+                                $("<script/>").attr('src', e).appendTo('body');
+                            }, i * LOAD_DELAY);
+                        }
+                    });
+                }
+                if (patOptions.css) {
+                    $.each(patOptions.css, function (i, e) {
+                        if ($("link[href='"+e+"']").length==0) {
+                            $("<link rel='stylesheet'/>").attr('href', e).appendTo('body');
+                        }
+                    });
+                }
             } 
             else if (cmd === 'newlayer') {
                 var cssOption = $.extend({},
@@ -90,8 +109,6 @@
                 }
 
                 $e.appendTo('body');
-            }
-            else if (cmd == 'isHighlight') {
             }
             else if (cmd === 'highlight') {
 
