@@ -63,15 +63,24 @@
           
           <h2>Demo</h2>
           <div style="padding: 50px">
-              <a class="btn btn-primary" rel="pat" data-pos="top">Demo: top box</a>
-              <a class="btn btn-primary" rel="pat" data-pos="bottom">Demo: bottom box</a>
-              <a class="btn btn-primary" rel="pat" data-pos="left">Demo: left box</a>
-              <a class="btn btn-primary" rel="pat" data-pos="right">Demo: right box</a>
+              <div>
+                  <a class="btn btn-primary" rel="pat" data-pos="top">Demo: top box</a>
+                  <a class="btn btn-primary" rel="pat" data-pos="bottom">Demo: bottom box</a>
+                  <a class="btn btn-primary" rel="pat" data-pos="left">Demo: left box</a>
+                  <a class="btn btn-primary" rel="pat" data-pos="right">Demo: right box</a>
+              </div>
+              <div>
+                  <a class="btn btn-primary" rel="pat-bar" data-pos="top" data-size="10%">Demo: top bar</a>
+              </div>
           </div>
           <!-- a href="btn" rel="pat-menu" data-pos="top" data-height="20%">Demo: top graph box</a -->
 
           <h1> How to get started? </h1>
           <pre>
+            &lt;script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" >&lt;/script>
+            &lt;script src="pat.js" >&lt;/script>
+
+            &lt;script>
             $('body').pat('init', {});
             $('body').pat('newlayer', {
               'id' : 'newlayer',
@@ -82,6 +91,7 @@
             $('body').pat('highlight', $("#test"),
                 { ... }
                 )
+            &lt;/script>
           </pre>
 
           <p>
@@ -96,7 +106,14 @@
               var isLayered = false;
 
               // intialised
-              $('body').pat('init', {});
+              $('body').pat('init', {
+                  script: [
+                    "http://nvd3.org/lib/d3.v2.js",
+                    "http://nvd3.org/nv.d3.js",
+                    "http://data.ockamo.com/app/mocknvd.js"
+                    ],
+                  css: ["http://nvd3.org/src/nv.d3.css"]
+              });
 
               $('body').on('click', '[rel="pat"]', function (e) {
 
@@ -122,6 +139,27 @@
                       };
 
                       $(this).pat('highlight', hlOpts );
+                  }
+              });
+
+              $('body').on('click', '[rel="pat-bar"]', function (e) {
+                  var pos = $(this).data('pos');
+                  var size = $(this).data('size');
+
+                  if (!isLayered) {
+                      $('body').pat('newlayer', {
+                          'id' : 'newlayer'
+                      });
+                      isLayered = true;
+                  }
+
+                  if ($.isPatted($(this))) {
+                      $(this).pat('noHighlight');
+                  } else {
+                      // adding a bit of hi to the page
+                      $(this).pat('menu', {
+                          'content': '<div id="chart"> <svg></svg> </div>' 
+                      });
                   }
               });
           });
