@@ -3,6 +3,8 @@ pat.js
 
 Patting on a layering system on top of any existing webpages.
 
+See [demo](http://sketchytechky.github.io/pat.js/)
+
     // <script src="lib/pat.js"></script>
 
 	// initialised all relevant scritps for the layer
