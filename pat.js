@@ -235,15 +235,16 @@
                 patOptions($self.find('.patjs-halo'));
             }
             else if (cmd === 'hoverable') {
-                $self.mouseenter(function (e) {
+                $(this).mouseenter(function (e) {
                     $(e.currentTarget).addClass('patjs-hovered');
                 }).mouseleave(function (e) {
                     $(e.currentTarget).removeClass('patjs-hovered');
                 });
             }
             else if (cmd === 'selectable') {
-                $self.click(function (e) {
+                $(this).click(function (e) {
                     $(e.currentTarget).pat('halo');
+                    return false;
                 });
             }
             else if (cmd === 'clear') {
