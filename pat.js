@@ -27,9 +27,11 @@
         'background-color': 'white',
         //'opacity' : '0.4',
         'font-family':  'Courier, "Courier New", monospace',
-        'border' : '1px dashed black',
-        'z-index': 100000+1,  // gruesome
-        'pointer-events' : 'none'  // dont allow pointe events
+        'border' : '1px solid black',
+        'box-shadow': '10px 10px 5px #cccccc',
+        'padding' : '10px',
+        'z-index': 100000+1  // gruesome
+        //'pointer-events' : 'none'  // dont allow pointe events
     };
         
 
@@ -146,7 +148,11 @@
                         
                         // content
                         $.each(content, function (tag,text) {
-                            $('<'+tag+'/>').text(text).appendTo($out);
+                            if (tag=='html') {
+                                $('<'+tag+'/>').html(text).appendTo($out);
+                            } else {
+                                $('<'+tag+'/>').text(text).appendTo($out);
+                            }
                         });
 
                         // append to body - we dont want to opacity effect
