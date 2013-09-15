@@ -230,10 +230,30 @@
                     'box-shadow': '0px 0px 5px red',
                     };
                 } 
-                $self.css(patOptions).addClass('patjs-halo');
+                if (!$self.hasClass('patjs-halo')) {
+                    $self.css(patOptions).addClass('patjs-halo');
+                } else {
+                    $self.css({'box-shadow':''}).removeClass('patjs-halo');
+                }
             }
-            else if (cmd === 'haloed') {
+            else if (cmd === 'haloed' || cmd == 'selected') {
                 patOptions($self.find('.patjs-halo'));
+            }
+            else if (cmd === 'hoverable') {
+                $self.mouseenter(function (e) {
+                    $(e.currentTarget).css({
+                        'box-shadow': '0px 0px 5px blue'
+                    });
+                }).mouseleave(function (e) {
+                    $(e.currentTarget).css({
+                        'box-shadow': ''
+                    });
+                });
+            }
+            else if (cmd === 'selectable') {
+                $self.click(function (e) {
+                    $(e.currentTarget).pat('halo');
+                });
             }
             else if (cmd === 'clear') {
                 var $l = getParentLayer();

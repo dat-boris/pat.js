@@ -83,6 +83,23 @@ describe("pat.js", function() {
                 expect(items.length).toEqual(3);
             });
         });
+
+        it("should allow mouseover to highlight elements", function () {
+            // allow mouseover
+            $(".selectable").pat('hoverable');
+            $(".selectable").mouseenter();
+            var boxs = $(".selectable").first().css('box-shadow');
+            expect(boxs).toBeTruthy();
+        });
+
+        it ("should allow multiple click actions to select items", function () {
+            $(".selectable").pat('selectable');
+            $(".selectable").click();
+            $('body').pat('selected', function (items) {
+                expect(items.length).toEqual(1);
+            });
+
+        });
     });
 
   });
