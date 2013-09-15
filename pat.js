@@ -223,6 +223,18 @@
                 });
                 $self.data('pat.attachedPanel', null);
             }
+            else if (cmd === 'halo') {
+                // options given is the css
+                if (!patOptions) {
+                    patOptions = {
+                    'box-shadow': '0px 0px 5px red',
+                    };
+                } 
+                $self.css(patOptions).addClass('patjs-halo');
+            }
+            else if (cmd === 'haloed') {
+                patOptions($self.find('.patjs-halo'));
+            }
             else if (cmd === 'clear') {
                 var $l = getParentLayer();
                 $(".patjs").remove();

@@ -47,16 +47,44 @@ describe("pat.js", function() {
                 'bottom' : { 'h2' : 'this is bottom layer' },
             });
 
+            // note the patjs special layout
             expect($(".patjs.leftpanel").length).toEqual($toHighlight.length);
 
         });
+
+        it("should display proper css ", function () {
+
+            var $toHighlight = $('.nav-header');
+
+            $toHighlight.pat('halo', {
+                'box-shadow': '0px 0px 5px red',
+            });
+
+            // note the patjs special layout
+            expect($(".patjs-halo").length).toEqual($toHighlight.length);
+            expect($(".patjs-halo").first().css('box-shadow')).toEqual("rgb(255, 0, 0) 0px 0px 5px 0px");
+
+        });
+        
+    });
+    
+    /**
+      The feaures:
+      1. select the multiple items
+      2. feedback of what items was selected
+      3. allow display a list of overall items
+      */
+    describe("select multiple items", function () {
+        it("should give multiple css ", function () {
+            var $toHighlight = $('.nav-header');
+            $toHighlight.pat('halo');
+
+            $('body').pat('haloed', function (items) {
+                expect(items.length).toEqual(3);
+            });
+        });
     });
 
-    /*
-       TODO
-    it("should attach comment to existing items");
-    it("should allow top bar to be shown");
-    */
   });
 
 
