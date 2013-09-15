@@ -225,15 +225,10 @@
             }
             else if (cmd === 'halo') {
                 // options given is the css
-                if (!patOptions) {
-                    patOptions = {
-                    'box-shadow': '0px 0px 5px red',
-                    };
-                } 
                 if (!$self.hasClass('patjs-halo')) {
-                    $self.css(patOptions).addClass('patjs-halo');
+                    $self.addClass('patjs-halo');
                 } else {
-                    $self.css({'box-shadow':''}).removeClass('patjs-halo');
+                    $self.removeClass('patjs-halo');
                 }
             }
             else if (cmd === 'haloed' || cmd == 'selected') {
@@ -241,13 +236,9 @@
             }
             else if (cmd === 'hoverable') {
                 $self.mouseenter(function (e) {
-                    $(e.currentTarget).css({
-                        'box-shadow': '0px 0px 5px blue'
-                    });
+                    $(e.currentTarget).addClass('patjs-hovered');
                 }).mouseleave(function (e) {
-                    $(e.currentTarget).css({
-                        'box-shadow': ''
-                    });
+                    $(e.currentTarget).removeClass('patjs-hovered');
                 });
             }
             else if (cmd === 'selectable') {

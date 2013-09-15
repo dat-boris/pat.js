@@ -26,6 +26,14 @@
           padding-right: 5px;
         }
       }
+
+
+      .patjs-hovered {
+          box-shadow: 0px 0px 15px blue; 
+      }
+      .patjs-halo {
+          box-shadow: 0px 0px 15px red; 
+      }
     </style>
 
     <!-- $JQ -->
@@ -58,16 +66,24 @@
           <h2>Demo</h2>
           <div class="demo-btn">
               <div>
-                  <a class="btn btn-primary" rel="pat" data-pos="top">Demo: top box</a>
-                  <a class="btn btn-primary" rel="pat" data-pos="bottom">Demo: bottom box</a>
-                  <a class="btn btn-primary" rel="pat" data-pos="left">Demo: left box</a>
-                  <a class="btn btn-primary" rel="pat" data-pos="right">Demo: right box</a>
+                  <a class="btn btn-primary highlightable" rel="highlight" data-pos="top">Enable highlight</a>
               </div>
               <div>
-                  <a class="btn btn-primary" rel="pat-bar" data-pos="top" data-size="250px">Demo: top bar (with external scripts and css)</a>
+                  <a class="btn btn-primary highlightable selectable" rel="select" data-pos="bottom">Selectable 1</a>
+                  <a class="btn btn-primary highlightable selectable" rel="select" data-pos="bottom">Selectable 2</a>
+                  <a class="btn btn-primary highlightable selectable" rel="select" data-pos="bottom">Selectable 3</a>
               </div>
               <div>
-                  <a class="btn btn-primary" rel="pat-clear">Reset</a>
+                  <a class="btn btn-primary highlightable" rel="pat" data-pos="top">Demo: top box</a>
+                  <a class="btn btn-primary highlightable" rel="pat" data-pos="bottom">Demo: bottom box</a>
+                  <a class="btn btn-primary highlightable" rel="pat" data-pos="left">Demo: left box</a>
+                  <a class="btn btn-primary highlightable" rel="pat" data-pos="right">Demo: right box</a>
+              </div>
+              <div>
+                  <a class="btn btn-primary highlightable" rel="pat-bar" data-pos="top" data-size="250px">Demo: top bar (with external scripts and css)</a>
+              </div>
+              <div>
+                  <a class="btn btn-primary highlightable" rel="pat-clear">Reset</a>
               </div>
           </div>
           <!-- a href="btn" rel="pat-menu" data-pos="top" data-height="20%">Demo: top graph box</a -->
@@ -121,6 +137,14 @@
                     "http://nvd3.org/nv.d3.js",
                     ],
                   css: ["http://nvd3.org/src/nv.d3.css"]
+              });
+
+              $('body').on('click', '[rel="highlight"]', function (e) {
+                  $('.highlightable').pat('hoverable');
+              });
+
+              $('body').on('click', '[rel="select"]', function (e) {
+                  $('.selectable').pat('selectable');
               });
 
               $('body').on('click', '[rel="pat"]', function (e) {

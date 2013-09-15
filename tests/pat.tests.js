@@ -56,13 +56,11 @@ describe("pat.js", function() {
 
             var $toHighlight = $('.nav-header');
 
-            $toHighlight.pat('halo', {
-                'box-shadow': '0px 0px 5px red',
-            });
+            $toHighlight.pat('halo');
 
             // note the patjs special layout
             expect($(".patjs-halo").length).toEqual($toHighlight.length);
-            expect($(".patjs-halo").first().css('box-shadow')).toEqual("rgb(255, 0, 0) 0px 0px 5px 0px");
+            expect($(".patjs-halo").first().hasClass('patjs-halo')).toBe(true);
 
         });
         
@@ -88,7 +86,7 @@ describe("pat.js", function() {
             // allow mouseover
             $(".selectable").pat('hoverable');
             $(".selectable").mouseenter();
-            var boxs = $(".selectable").first().css('box-shadow');
+            var boxs = $(".selectable").first().hasClass('patjs-hovered');
             expect(boxs).toBeTruthy();
         });
 
